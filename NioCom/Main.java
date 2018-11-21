@@ -1,28 +1,16 @@
 package NioCom;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 import NioCom.errors.ChannelRegisterd;
 import NioCom.loop.IoLoop;
+import NioCom.utils.ByteUtil;
 
 public class Main {
-    public static void main(String []args) {
-        IoLoop looper = null ;
-        try {
-  	         looper = IoLoop.instance() ;
-  	    } catch (IOException e) {
-  		// TODO Auto-generated catch block
-  		     e.printStackTrace();
-  		     return ;
-  	    }
-        Server server = new Server(9999) ;
-        //System.out.println(looper);
-        try {
-			server.startServer();
-		} catch (IOException | ChannelRegisterd e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        looper.startIoLoop();
+    public static void main(String []args) {        
+    	Server server = new Server(9999) ;
+        server.startServer();
+        IoLoop.instance().startIoLoop();
     }//main
 }//class
